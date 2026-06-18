@@ -30,6 +30,33 @@ namespace ProjetoMD.Controllers
         {
             return await _context.Clientes.ToListAsync();
         }
-    }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Cliente>> GetCliente(int id)
+        {
+            var cliente = await _context.Clientes.FindAsync(id);
 
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+            return Ok(cliente);
+        }
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Cliente>> PutCliente(int id, Cliente cliente)
+        {
+            var clienteExistente = await _context.Clientes.FindAsync(id);
+
+            if(clienteExistente == null)
+            {
+                return NotFound();
+            }
+            
+            clienteExistente.Nome = cliente.Nome;
+            clienteExistente.Telefone = cliente.Telefone;
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+    }
 }

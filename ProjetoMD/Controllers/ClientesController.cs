@@ -58,5 +58,36 @@ namespace ProjetoMD.Controllers
 
             return NoContent();
         }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Cliente>> DeleteCliente(int id)
+        {
+            var clienteExistente = await _context.Clientes.FindAsync(id);
+
+            if(clienteExistente == null)
+            {
+                return NotFound();
+            }
+
+            _context.Clientes.Remove(clienteExistente);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+        
+        [HttpDelete]
+        public async Task<ActionResult<IEnumerable<Cliente>>> DeleteCliente()
+        {
+            var clientesCadastrados = await _context.Clientes.ToListAsync();
+
+            if(clientesCadastrados.Count == 0)
+            {
+                return NoContent();
+            }
+
+            _context.Clientes.RemoveRange(clientesCadastrados);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 }

@@ -6,7 +6,7 @@ Este projeto é um sistema de gestão desenvolvido para fins de aprendizado, uti
 - **Backend:** .NET 10 (ASP.NET Core Web API)
 - **Banco de Dados:** SQLite (Fluxo Code-First com EF Core)
 - **Frontend:** React + TypeScript (Planejado)
-- **Arquitetura:** Princípios de Clean Architecture e MVC
+- **Arquitetura:** ASP.NET Core Web API com estrutura simples em `Controllers`, `Data` e `Models`
 
 ## 📝 Histórico de Etapas Concluídas
 
@@ -34,6 +34,8 @@ Este projeto é um sistema de gestão desenvolvido para fins de aprendizado, uti
 - [x] Identificação e correção do erro de banco `no such table: Clientes`.
 - [x] Entendimento prático do `model binding` no ASP.NET Core para receber o JSON no body.
 - [x] Implementação do `PUT` para atualização de cliente por `id`.
+- [x] Implementação do `DELETE` por `id` para remover um cliente específico.
+- [x] Implementação do `DELETE` geral para remover todos os clientes.
 
 ## 🚧 Status Atual
 
@@ -42,12 +44,17 @@ O backend já está funcionando como uma API de clientes com SQLite e Entity Fra
 - `GET /api/clientes` para listar todos os clientes;
 - `GET /api/clientes/{id}` para buscar um cliente específico.
 - `PUT /api/clientes/{id}` para atualizar um cliente existente.
+- `DELETE /api/clientes/{id}` para remover um cliente específico.
+- `DELETE /api/clientes` para remover todos os clientes.
 
 Durante os testes foi identificado que o corpo do `POST` não deve enviar `Id`, porque esse valor é gerado pelo banco automaticamente. Também foi necessário corrigir o banco de dados para que a tabela `Clientes` existisse de fato antes das inserções.
+
+Observação: o projeto ainda está em evolução, então a documentação deve continuar refletindo o comportamento real do código à medida que novos campos, validações e melhorias forem adicionados.
 
 ## 🎯 Próximo Passo
 
 - Refinar a documentação dos endpoints no Scalar.
+- Adicionar validação de entrada e tratamento melhor de erros.
 - Continuar a evolução do CRUD e preparar a base para novas entidades do sistema.
 
 ---

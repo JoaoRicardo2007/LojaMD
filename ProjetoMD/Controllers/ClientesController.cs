@@ -2,6 +2,7 @@
 using ProjetoMD.Data;
 using ProjetoMD.Models;
 using Microsoft.EntityFrameworkCore;
+using ProjetoMD.DTOs;
 
 namespace ProjetoMD.Controllers
 {
@@ -17,13 +18,26 @@ namespace ProjetoMD.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
+        public async Task<ActionResult<Cliente>> PostCliente(ClienteCreateDto clienteDto)
         {
+            var cliente = new Cliente
+            {
+                Nome = clienteDto.Nome,
+                Telefone = clienteDto.Telefone
+            };
+
             _context.Clientes.Add(cliente);
             await _context.SaveChangesAsync();
 
             return Ok(cliente);
         }
+        /*public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
+        {
+            _context.Clientes.Add(cliente);
+            await _context.SaveChangesAsync();
+
+            return Ok(cliente);
+        }*/
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Cliente>>> GetCliente()
@@ -42,7 +56,23 @@ namespace ProjetoMD.Controllers
             return Ok(cliente);
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult<Cliente>> PutCliente(int id, Cliente cliente)
+        public async Task<ActionResult<Cliente>> PutCliente(int id, ClienteCreateDto clienteDto)
+        {
+            var clienteExistente = await _context.Clientes.FindAsync(id);
+
+            if (clienteExistente == null)
+            {
+                return NotFound();
+            }
+
+            clienteExistente.Nome = clienteDto.Nome;
+            clienteExistente.Telefone = clienteDto.Telefone;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(clienteExistente);
+       }
+        /*public async Task<ActionResult<Cliente>> PutCliente(int id, Cliente cliente)
         {
             var clienteExistente = await _context.Clientes.FindAsync(id);
 
@@ -57,7 +87,7 @@ namespace ProjetoMD.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
+        }*/
         [HttpDelete("{id}")]
         public async Task<ActionResult<Cliente>> DeleteCliente(int id)
         {
@@ -81,7 +111,7 @@ namespace ProjetoMD.Controllers
 
             if(clientesCadastrados.Count == 0)
             {
-                return NoContent();
+                return NotFound();
             }
 
             _context.Clientes.RemoveRange(clientesCadastrados);

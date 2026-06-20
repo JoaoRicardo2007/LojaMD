@@ -5,8 +5,8 @@ Este projeto é um sistema de gestão desenvolvido para fins de aprendizado, uti
 ## 🛠️ Tecnologias
 - **Backend:** .NET 10 (ASP.NET Core Web API)
 - **Banco de Dados:** SQLite (Fluxo Code-First com EF Core)
-- **Frontend:** React + TypeScript (Planejado)
-- **Arquitetura:** ASP.NET Core Web API com estrutura simples em `Controllers`, `Data` e `Models`
+- **Frontend:** React + TypeScript com Vite
+- **Arquitetura:** solução separada em `ProjetoMD/` para o backend e `frontend/` para a interface
 
 ## 📝 Histórico de Etapas Concluídas
 
@@ -55,6 +55,8 @@ Estrutura atual de entrada:
 - `ClienteCreateDto` representa o JSON enviado pelo cliente da API.
 - O `Id` permanece na entidade, mas não faz parte do corpo do `POST`.
 
+O frontend também já foi iniciado em uma base React + TypeScript com Vite. A estrutura foi separada em `pages`, `components`, `services`, `types` e `styles`, com uma tela inicial de clientes pronta para consumir a API do backend.
+
 Observação: o projeto ainda está em evolução, então a documentação deve continuar refletindo o comportamento real do código à medida que novos campos, validações e melhorias forem adicionados.
 
 ## 🎯 Próximo Passo
@@ -62,6 +64,7 @@ Observação: o projeto ainda está em evolução, então a documentação deve 
 - Refinar a documentação dos endpoints no Scalar.
 - Adicionar validação de entrada mais explícita no DTO e tratamento melhor de erros.
 - Continuar a evolução do CRUD e preparar a base para novas entidades do sistema.
+- Evoluir a tela de clientes no frontend e conectar o fluxo completo com a API.
 
 ---
 *Documentação em constante atualização conforme o progresso do mentorado.*
